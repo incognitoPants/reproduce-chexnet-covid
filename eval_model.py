@@ -34,8 +34,7 @@ def make_pred_multilabel(data_transforms, model, PATH_TO_IMAGES):
         path_to_images=PATH_TO_IMAGES,
         fold="test",
         transform=data_transforms['val'])
-    dataloader = torch.utils.data.DataLoader(
-        dataset, BATCH_SIZE, shuffle=False, num_workers=8)
+    dataloader = torch.utils.data.DataLoader(dataset, BATCH_SIZE, shuffle=False, num_workers=8)
     size = len(dataset)
 
     # create empty dfs
@@ -50,12 +49,14 @@ def make_pred_multilabel(data_transforms, model, PATH_TO_IMAGES):
 
         true_labels = labels.cpu().data.numpy()
         batch_size = true_labels.shape
+        #print('batch_size: ', batch_size)
 
         outputs = model(inputs)
         probs = outputs.cpu().data.numpy()
 
         # get predictions and true values for each item in batch
         for j in range(0, batch_size[0]):
+            #print('Im in the prediction & true values loop')
             thisrow = {}
             truerow = {}
             thisrow["Image Index"] = dataset.df.index[BATCH_SIZE * i + j]
@@ -70,10 +71,11 @@ def make_pred_multilabel(data_transforms, model, PATH_TO_IMAGES):
             pred_df = pred_df.append(thisrow, ignore_index=True)
             true_df = true_df.append(truerow, ignore_index=True)
 
-        if(i % 10 == 0):
+        if (i % 10 == 0):
             print(str(i * BATCH_SIZE))
 
     auc_df = pd.DataFrame(columns=["label", "auc"])
+    print(true_df.head())
 
     # calc AUCs
     for column in true_df:
@@ -92,16 +94,15 @@ def make_pred_multilabel(data_transforms, model, PATH_TO_IMAGES):
             'Emphysema',
             'Fibrosis',
             'Pleural_Thickening',
-                'Hernia']:
-                    continue
+            'Hernia']:
+            continue
         actual = true_df[column]
         pred = pred_df["prob_" + column]
         thisrow = {}
         thisrow['label'] = column
         thisrow['auc'] = np.nan
         try:
-            thisrow['auc'] = sklm.roc_auc_score(
-                actual.as_matrix().astype(int), pred.as_matrix())
+            thisrow['auc'] = sklm.roc_auc_score(actual.to_numpy().astype(int), pred.to_numpy()) #replaced as_matrix with to_numpy() since depracated
         except BaseException:
             print("can't calculate auc for " + str(column))
         auc_df = auc_df.append(thisrow, ignore_index=True)

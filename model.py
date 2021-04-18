@@ -31,7 +31,7 @@ import eval_model as E
 
 use_gpu = torch.cuda.is_available()
 gpu_count = torch.cuda.device_count()
-print("Available GPU count:" + str(gpu_count))
+#print("Available GPU count:" + str(gpu_count))
 
 
 def checkpoint(model, best_loss, epoch, LR):
@@ -92,6 +92,7 @@ def train_model(
     best_epoch = -1
     last_train_loss = -1
 
+
     # iterate over epochs
     for epoch in range(start_epoch, num_epochs + 1):
         print('Epoch {}/{}'.format(epoch, num_epochs))
@@ -125,7 +126,9 @@ def train_model(
                     loss.backward()
                     optimizer.step()
 
-                running_loss += loss.data[0] * batch_size
+                #running_loss += loss.data[0] * batch_size
+                #print(loss.data[0])
+                running_loss += loss.item() * batch_size
 
             epoch_loss = running_loss / dataset_sizes[phase]
 
@@ -199,8 +202,8 @@ def train_cnn(PATH_TO_IMAGES, LR, WEIGHT_DECAY):
         aucs: AUCs for each train,test tuple
 
     """
-    NUM_EPOCHS = 100
-    BATCH_SIZE = 16
+    NUM_EPOCHS = 100#100
+    BATCH_SIZE = 16 #16
 
     try:
         rmtree('results/')
@@ -221,7 +224,7 @@ def train_cnn(PATH_TO_IMAGES, LR, WEIGHT_DECAY):
     data_transforms = {
         'train': transforms.Compose([
             transforms.RandomHorizontalFlip(),
-            transforms.Scale(224),
+            transforms.Resize(224),#was transforms.Scale
             # because scale doesn't always give 224 x 224, this ensures 224 x
             # 224
             transforms.CenterCrop(224),
@@ -229,7 +232,7 @@ def train_cnn(PATH_TO_IMAGES, LR, WEIGHT_DECAY):
             transforms.Normalize(mean, std)
         ]),
         'val': transforms.Compose([
-            transforms.Scale(224),
+            transforms.Resize(224),#was transforms.Scale
             transforms.CenterCrop(224),
             transforms.ToTensor(),
             transforms.Normalize(mean, std)
@@ -292,3 +295,4 @@ def train_cnn(PATH_TO_IMAGES, LR, WEIGHT_DECAY):
         data_transforms, model, PATH_TO_IMAGES)
 
     return preds, aucs
+
