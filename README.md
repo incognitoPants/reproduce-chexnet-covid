@@ -1,4 +1,7 @@
 # reproduce-chexnet
+04/19/2021 Updated Notes:
+Additional code was added so the code runs reliably on Windows 10. The added loop in retrain.py needs to be removed if running on a different OS.
+
 [![Binder](https://mybinder.org/badge.svg)](https://mybinder.org/v2/gh/jrzech/reproduce-chexnet/master?filepath=Explore_Predictions.ipynb)
 
 Provides Python code to reproduce model training, predictions, and heatmaps from the [CheXNet paper](https://arxiv.org/pdf/1711.05225) that predicted 14 common diagnoses using convolutional neural networks in over 100,000 NIH chest x-rays.
