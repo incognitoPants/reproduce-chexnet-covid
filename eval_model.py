@@ -94,7 +94,8 @@ def make_pred_multilabel(data_transforms, model, PATH_TO_IMAGES):
             'Emphysema',
             'Fibrosis',
             'Pleural_Thickening',
-            'Hernia']:
+            'Hernia',
+            'Covid']:
             continue
         actual = true_df[column]
         pred = pred_df["prob_" + column]

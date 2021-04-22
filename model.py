@@ -203,7 +203,7 @@ def train_cnn(PATH_TO_IMAGES, LR, WEIGHT_DECAY):
 
     """
     NUM_EPOCHS = 100#100
-    BATCH_SIZE = 16 #16
+    BATCH_SIZE = 32 #16
 
     try:
         rmtree('results/')
@@ -215,10 +215,10 @@ def train_cnn(PATH_TO_IMAGES, LR, WEIGHT_DECAY):
     mean = [0.485, 0.456, 0.406]
     std = [0.229, 0.224, 0.225]
 
-    N_LABELS = 14  # we are predicting 14 labels
+    N_LABELS = 15  # we are predicting 15 labels. Originally 14 before adding Covid
 
     # load labels
-    df = pd.read_csv("nih_labels.csv", index_col=0)
+    df = pd.read_csv("nih_labels_modified.csv", index_col=0)
 
     # define torchvision transforms
     data_transforms = {

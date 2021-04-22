@@ -9,7 +9,7 @@ def run():
     print('loop')
 
 
-if __name__ == '__main__':
+if __name__ == '__main__': #Only for Win10. Remove if running on Linux
     start = time.time()
     run()
     # you will need to customize PATH_TO_IMAGES to where you have uncompressed
