@@ -49,7 +49,8 @@ def calc_cam(x, label, model):
         'Emphysema',
         'Fibrosis',
         'Pleural_Thickening',
-        'Hernia']
+        'Hernia',
+        'Covid']
 
     if label not in FINDINGS:
         raise ValueError(
@@ -120,22 +121,24 @@ def calc_cam(x, label, model):
     #make cam into local region probabilities with sigmoid
     
     cam=1/(1+np.exp(-cam))
-    
+
+    # Added Covid and recalculated probabilities
     label_baseline_probs={
-        'Atelectasis':0.103,
-        'Cardiomegaly':0.025,
-        'Effusion':0.119,
-        'Infiltration':0.177,
-        'Mass':0.051,
-        'Nodule':0.056,
+        'Atelectasis':0.100,
+        'Cardiomegaly':0.024,
+        'Effusion':0.115,
+        'Infiltration':0.172,
+        'Mass':0.050,
+        'Nodule':0.055,
         'Pneumonia':0.012,
-        'Pneumothorax':0.047,
-        'Consolidation':0.042,
-        'Edema':0.021,
+        'Pneumothorax':0.046,
+        'Consolidation':0.040,
+        'Edema':0.020,
         'Emphysema':0.022,
         'Fibrosis':0.015,
-        'Pleural_Thickening':0.03,
-        'Hernia':0.002
+        'Pleural_Thickening':0.029,
+        'Hernia':0.002,
+        'Covid':0.031
     }
     
     #normalize by baseline probabilities
@@ -176,6 +179,7 @@ def load_data(
     mean = [0.485, 0.456, 0.406]
     std = [0.229, 0.224, 0.225]
 
+    # Added Covid
     FINDINGS = [
         'Atelectasis',
         'Cardiomegaly',
@@ -190,7 +194,8 @@ def load_data(
         'Emphysema',
         'Fibrosis',
         'Pleural_Thickening',
-        'Hernia']
+        'Hernia',
+        'Covid']
 
     data_transform = transforms.Compose([
         transforms.Scale(224),
@@ -228,6 +233,8 @@ def show_next(dataloader, model, LABEL):
     Returns:
         None (plots output)
     """
+
+    # Added Covid
     FINDINGS = [
         'Atelectasis',
         'Cardiomegaly',
@@ -242,7 +249,8 @@ def show_next(dataloader, model, LABEL):
         'Emphysema',
         'Fibrosis',
         'Pleural_Thickening',
-        'Hernia']
+        'Hernia',
+        'Covid']
     
     label_index = next(
         (x for x in range(len(FINDINGS)) if FINDINGS[x] == LABEL))

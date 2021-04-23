@@ -75,7 +75,7 @@ def make_pred_multilabel(data_transforms, model, PATH_TO_IMAGES):
             print(str(i * BATCH_SIZE))
 
     auc_df = pd.DataFrame(columns=["label", "auc"])
-    print(true_df.head())
+    #print(true_df.head())
 
     # calc AUCs
     for column in true_df:
