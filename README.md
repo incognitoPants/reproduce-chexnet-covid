@@ -24,9 +24,7 @@ The COVID-19 chest x-rays were from an aggregated Kaggle Dataset called [COVID-1
 view the pretrained model and results prior to the addition of the Covid label and data.  
 
 
-## Replicated results:
-This reproduction achieved average test set AUC 0.836 across 14 findings compared to 0.841 reported in original paper:
-
+## Results:
 <div>
 <table border="0" class="dataframe">
   <thead>
