@@ -1,25 +1,28 @@
-# reproduce-chexnet
-04/19/2021 Updated Notes:
-Additional code was added so the code runs reliably on Windows 10. The added loop in retrain.py needs to be removed if running on a different OS.
-
-[![Binder](https://mybinder.org/badge.svg)](https://mybinder.org/v2/gh/jrzech/reproduce-chexnet/master?filepath=Explore_Predictions.ipynb)
-
-Provides Python code to reproduce model training, predictions, and heatmaps from the [CheXNet paper](https://arxiv.org/pdf/1711.05225) that predicted 14 common diagnoses using convolutional neural networks in over 100,000 NIH chest x-rays.
-
-![Illustration](illustration.png?raw=true "Illustration")
-
+# CheXNet with Covid
+We used an implementation of CheXNet by John Zech called [reproduce-chexnet](https://github.com/jrzech/reproduce-chexnet) and combined an aggregated COVID-19 Chest X-ray dataset from Kaggle. 
 
 ## Getting Started:
 Click on the `launch binder` button at the top of this `README` to launch a remote instance in your browser using [binder](https://mybinder.org/). This requires no local configuration and lets you get started immediately. Open `Explore_Predictions.ipynb`, run all cells, and follow the instructions provided to review a selection of included [chest x-rays from NIH](https://arxiv.org/pdf/1705.02315.pdf).
 
-To configure your own local instance (assumes [Anaconda is installed](https://www.anaconda.com/download/); can be run on Amazon EC2 p2.xlarge instance if you do not have a GPU):
+[![Binder](https://mybinder.org/badge.svg)](https://mybinder.org/v2/gh/incognitoPants/reproduce-chexnet-covid/HEAD?filepath=%2FExplore_Predictions.ipynb)
 
-```git clone https://www.github.com/jrzech/reproduce-chexnet.git
-cd reproduce-chexnet
-conda env create -f environment.yml
-source postBuild
-source activate reproduce-chexnet
-```
+This is a re-implementation of the original [CheXNet paper](https://arxiv.org/pdf/1711.05225) that predicted 14 common diagnoses, but modified
+to include COVID-19. It uses over 100,000 images from the National Institutes of Health (NIH) and an aggregated dataset of chest x-rays from Kaggle.
+
+![Illustration](Covid_P1.000_file_000001563.png "Illustration")
+
+
+## Dataset
+The original CheXNet dataset uses chest x-rays from the National Institutes of Health (NIH). It contains roughly 112,000 chest x-ray images representing 14 different disease labels.
+The full NIH dataset can be downloaded [here](https://nihcc.app.box.com/v/ChestXray-NIHCC). The files are compressed in `tar.gz` format and need to be extracted to an images folder.
+  
+The COVID-19 chest x-rays were from an aggregated Kaggle Dataset called [COVID-19 Radiography Database](https://www.kaggle.com/tawsifurrahman/covid19-radiography-database).
+
+## Additional Notes
+- **retrain.py**: Additional code was added so it runs reliably on Windows 10. The added loop in retrain.py needs to be removed if running on a different OS.  
+- **pretrained_orig folder**: This is from the original reproduce-chexnet source code. It can be used to 
+view the pretrained model and results prior to the addition of the Covid label and data.  
+
 
 ## Replicated results:
 This reproduction achieved average test set AUC 0.836 across 14 findings compared to 0.841 reported in original paper:
@@ -29,11 +32,13 @@ This reproduction achieved average test set AUC 0.836 across 14 findings compare
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>retrained auc</th>
-      <th>chexnet auc</th>
+      <th>CheXNet AUC</th>
+      <th>Retrained AUC</th>
+      <th>AUC with Covid</th>
     </tr>
     <tr>
-      <th>label</th>
+      <th>Labels</th>
+      <th></th>
       <th></th>
       <th></th>
     </tr>
@@ -41,111 +46,114 @@ This reproduction achieved average test set AUC 0.836 across 14 findings compare
   <tbody>
     <tr>
       <th>Atelectasis</th>
-      <td>0.8161</td>
       <td>0.8094</td>
+      <td>0.8161</td>
+      <td>0.8119</td>
     </tr>
     <tr>
       <th>Cardiomegaly</th>
-      <td>0.9105</td>
       <td>0.9248</td>
+      <td>0.9105</td>
+      <td>0.8991</td>
     </tr>
     <tr>
       <th>Consolidation</th>
-      <td>0.8008</td>
       <td>0.7901</td>
+      <td>0.8008</td>
+      <td>0.8081</td>
+    </tr>
+    <tr>
+      <th>Covid</th>
+      <td></td>
+      <td></td>
+      <td>0.9999</td>
     </tr>
     <tr>
       <th>Edema</th>
-      <td>0.8979</td>
       <td>0.8878</td>
+      <td>0.8979</td>
+      <td>0.8923</td>
     </tr>
     <tr>
       <th>Effusion</th>
-      <td>0.8839</td>
       <td>0.8638</td>
+      <td>0.8839</td>
+      <td>0.8840</td>
     </tr>
     <tr>
       <th>Emphysema</th>
-      <td>0.9227</td>
       <td>0.9371</td>
+      <td>0.9227</td>
+      <td>0.9003</td>
     </tr>
     <tr>
       <th>Fibrosis</th>
-      <td>0.8293</td>
       <td>0.8047</td>
+      <td>0.8293</td>
+      <td>0.8132</td>
     </tr>
     <tr>
       <th>Hernia</th>
-      <td>0.9010</td>
       <td>0.9164</td>
+      <td>0.9010</td>
+      <td>0.8487</td>
     </tr>
     <tr>
       <th>Infiltration</th>
-      <td>0.7077</td>
       <td>0.7345</td>
+      <td>0.7077</td>
+      <td>0.7190</td>
     </tr>
     <tr>
       <th>Mass</th>
-      <td>0.8308</td>
       <td>0.8676</td>
+      <td>0.8308</td>
+      <td>0.8057</td>
     </tr>
     <tr>
       <th>Nodule</th>
-      <td>0.7748</td>
       <td>0.7802</td>
+      <td>0.7748</td>
+      <td>0.7633</td>
     </tr>
     <tr>
       <th>Pleural_Thickening</th>
-      <td>0.7860</td>
       <td>0.8062</td>
+      <td>0.7860</td>
+      <td>0.7768</td>
     </tr>
     <tr>
       <th>Pneumonia</th>
-      <td>0.7651</td>
       <td>0.7680</td>
+      <td>0.7651</td>
+      <td>0.7586</td>
     </tr>
     <tr>
       <th>Pneumothorax</th>
-      <td>0.8739</td>
       <td>0.8887</td>
+      <td>0.8739</td>
+      <td>0.8743</td>
     </tr>
   </tbody>
 </table>
 </div>
 
 ## Results available in pretrained folder:
-- `aucs.csv`: test AUCs of retrained model vs original ChexNet reported results
+- `aucs.csv`: test AUCs of retrained model (including COVID-19 label) vs original ChexNet reported results
 - `checkpoint`: saved model checkpoint
 - `log_train`: log of train and val loss by epoch
 - `preds.csv`: individual probabilities for each finding in each test set image predicted by retrained model
 
-## NIH Dataset
-To explore the full dataset, [download images from NIH (large, ~40gb compressed)](https://nihcc.app.box.com/v/ChestXray-NIHCC),
-extract all `tar.gz` files to a single folder, and provide path as needed in code.
 
 ## Train your own model!
-Please note: a GPU is required to train the model. You will encounter errors if you do not have a GPU available and CUDA installed and you attempt to retrain. With a GPU, you can retrain the model with `retrain.py`. Make sure you download the full NIH dataset before trying this. If you run out of GPU memory, reduce `BATCH_SIZE` from its default setting of 16.
+Please note: a GPU is required to train the model. You will encounter errors if you do not have a GPU available and CUDA installed and you attempt to retrain. With a GPU, you can retrain the model with `retrain.py`. Make sure you download both required datasets before trying this. If you run out of GPU memory, reduce `BATCH_SIZE` from its default setting of 32.
 
-If you do not have a GPU, but wish to retrain the model yourself to verify performance, you can replicate the model using Amazon EC2's p2.xlarge instance ($0.90/hr at time of writing) with an AMI that has CUDA installed (e.g. Deep Learning AMI (Ubuntu) Version 8.0 - ami-dff741a0). After [creating and ssh-ing into the EC2 instance](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EC2_GetStarted.html), follow the instructions in Getting Started above to configure your environment. If you have no experience with Amazon EC2, [fast.ai's tutorial is a good place to start](http://course.fast.ai/lessons/aws.html)
+If you do not have a GPU, but wish to retrain and verify the results, you can set up a cloud instance with a dedicated GPU using AWS or Google Cloud. The price depending on your chosen environment and GPU will be around 1-3 USD per hour. 
 
-## Note on training
-I use SGD+momentum rather than the Adam optimizer as described in the original [paper](https://arxiv.org/pdf/1711.05225.pdf). I achieved better results with SGD+momentum, as has been reported in [other work](https://arxiv.org/pdf/1705.08292.pdf).
+A sample of 621 test NIH chest x-rays enriched for positive pathology is included with the repo to faciliate immediate use and exploration in the `Explore Predictions.ipynb` notebook. The [full NIH dataset](https://nihcc.app.box.com/v/ChestXray-NIHCC) and 
+the [COVID-19 Radiography Database](https://www.kaggle.com/tawsifurrahman/covid19-radiography-database) are required for model retraining.
 
-## Note on data
-A sample of 621 test NIH chest x-rays enriched for positive pathology is included with the repo to faciliate immediate use and exploration in the `Explore Predictions.ipynb` notebook. The [full NIH dataset](https://nihcc.app.box.com/v/ChestXray-NIHCC) is required for model retraining.
-
-## Use and citation
-My goal in releasing this code is to increase transparency and replicability of deep learning models in radiology. I encourage you to use this code to start your own projects. If you do, please cite the repo:
-
-```@misc{Zech2018,
-  author = {Zech, J.},
-  title = {reproduce-chexnet},
-  year = {2018},
-  publisher = {GitHub},
-  journal = {GitHub repository},
-  howpublished = {\url{https://github.com/jrzech/reproduce-chexnet}}
-}
-```
 
 ## Acknowledgements
-With deep gratitude to researchers and developers at PyTorch, NIH, Stanford, and Project Jupyter, on whose generous work this project relies. With special thanks to Sasank Chilamkurthy, whose demonstration code was incorporated into this project. PyTorch is an incredible contribution to the research community.
+We would like to acknowledge John Zech for his implementation of CheXNet, which was the basis of our entire project.  
+His original implementation can be found [here](https://github.com/jrzech/reproduce-chexnet).
