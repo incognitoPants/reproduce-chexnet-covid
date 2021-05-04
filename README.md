@@ -1,13 +1,12 @@
 # CheXNet with Covid
 We used an implementation of CheXNet by John Zech called [reproduce-chexnet](https://github.com/jrzech/reproduce-chexnet) and combined an aggregated COVID-19 Chest X-ray dataset from Kaggle. 
 
-## Getting Started:
-Click on the `launch binder` button at the top of this `README` to launch a remote instance in your browser using [binder](https://mybinder.org/). This requires no local configuration and lets you get started immediately. Open `Explore_Predictions.ipynb`, run all cells, and follow the instructions provided to review a selection of included [chest x-rays from NIH](https://arxiv.org/pdf/1705.02315.pdf).
-
-[![Binder](https://mybinder.org/badge.svg)](https://mybinder.org/v2/gh/incognitoPants/reproduce-chexnet-covid/HEAD?filepath=%2FExplore_Predictions.ipynb)
-
 This is a re-implementation of the original [CheXNet paper](https://arxiv.org/pdf/1711.05225) that predicted 14 common diagnoses, but modified
-to include COVID-19. It uses over 100,000 images from the National Institutes of Health (NIH) and an aggregated dataset of chest x-rays from Kaggle.
+to include COVID-19. It uses over 100,000 images from the National Institutes of Health (NIH) and an aggregated dataset of over 3,000 chest x-rays from Kaggle.
+
+## Getting Started:
+A sample of test NIH and aggregated COVID-19 chest x-rays for positive pathology are included with the repository to facilitate immediate use and exploration in the `Explore Predictions.ipynb` notebook. The [full NIH dataset](https://nihcc.app.box.com/v/ChestXray-NIHCC) and 
+the [COVID-19 Radiography Database](https://www.kaggle.com/tawsifurrahman/covid19-radiography-database) are required for model retraining.
 
 ![Illustration](Covid_P1.000_file_000001563.png "Illustration")
 
@@ -143,13 +142,11 @@ view the pretrained model and results prior to the addition of the Covid label a
 - `preds.csv`: individual probabilities for each finding in each test set image predicted by retrained model
 
 
-## Train your own model!
-Please note: a GPU is required to train the model. You will encounter errors if you do not have a GPU available and CUDA installed and you attempt to retrain. With a GPU, you can retrain the model with `retrain.py`. Make sure you download both required datasets before trying this. If you run out of GPU memory, reduce `BATCH_SIZE` from its default setting of 32.
+## Train your own model
+A GPU is required to train the model. You will encounter errors if you do not have a GPU available and CUDA installed and you attempt to retrain. With a GPU, you can retrain the model with `retrain.py`. Make sure you download both required datasets before trying this. If you run out of GPU memory, reduce `BATCH_SIZE` from its default setting of 32.
 
-If you do not have a GPU, but wish to retrain and verify the results, you can set up a cloud instance with a dedicated GPU using AWS or Google Cloud. The price depending on your chosen environment and GPU will be around 1-3 USD per hour. 
-
-A sample of 621 test NIH chest x-rays enriched for positive pathology is included with the repo to faciliate immediate use and exploration in the `Explore Predictions.ipynb` notebook. The [full NIH dataset](https://nihcc.app.box.com/v/ChestXray-NIHCC) and 
-the [COVID-19 Radiography Database](https://www.kaggle.com/tawsifurrahman/covid19-radiography-database) are required for model retraining.
+If you do not have a GPU, but wish to retrain and verify the results, you can set up a cloud instance with a dedicated GPU using AWS or Google Cloud. The price depending on your chosen environment and GPU will be around 1-3 USD per hour.
+In our testing, AWS is easier to deploy.
 
 
 ## Acknowledgements
