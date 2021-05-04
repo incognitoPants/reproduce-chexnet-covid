@@ -5,10 +5,10 @@ dependencies:
   - python = 3.8
   - numpy
   - matplotlib
-  - pillow = 5.1.0
+  - pillow
   - pandas
   - scikit-image
   - scikit-learn
   - seaborn
   - jupyterlab
-  - ipykernel = 4.8.2
+  - ipykernel
