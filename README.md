@@ -46,19 +46,19 @@ view the pretrained model and results prior to the addition of the Covid label a
       <th>Atelectasis</th>
       <td>0.8094</td>
       <td>0.8161</td>
-      <td>0.8119</td>
+      <td>0.8197</td>
     </tr>
     <tr>
       <th>Cardiomegaly</th>
       <td>0.9248</td>
       <td>0.9105</td>
-      <td>0.8991</td>
+      <td>0.9030</td>
     </tr>
     <tr>
       <th>Consolidation</th>
       <td>0.7901</td>
       <td>0.8008</td>
-      <td>0.8081</td>
+      <td>0.8084</td>
     </tr>
     <tr>
       <th>Covid</th>
@@ -70,67 +70,67 @@ view the pretrained model and results prior to the addition of the Covid label a
       <th>Edema</th>
       <td>0.8878</td>
       <td>0.8979</td>
-      <td>0.8923</td>
+      <td>0.8991</td>
     </tr>
     <tr>
       <th>Effusion</th>
       <td>0.8638</td>
       <td>0.8839</td>
-      <td>0.8840</td>
+      <td>0.8857</td>
     </tr>
     <tr>
       <th>Emphysema</th>
       <td>0.9371</td>
       <td>0.9227</td>
-      <td>0.9003</td>
+      <td>0.9185</td>
     </tr>
     <tr>
       <th>Fibrosis</th>
       <td>0.8047</td>
       <td>0.8293</td>
-      <td>0.8132</td>
+      <td>0.8299</td>
     </tr>
     <tr>
       <th>Hernia</th>
       <td>0.9164</td>
       <td>0.9010</td>
-      <td>0.8487</td>
+      <td>0.8877</td>
     </tr>
     <tr>
       <th>Infiltration</th>
       <td>0.7345</td>
       <td>0.7077</td>
-      <td>0.7190</td>
+      <td>0.7248</td>
     </tr>
     <tr>
       <th>Mass</th>
       <td>0.8676</td>
       <td>0.8308</td>
-      <td>0.8057</td>
+      <td>0.8285</td>
     </tr>
     <tr>
       <th>Nodule</th>
       <td>0.7802</td>
       <td>0.7748</td>
-      <td>0.7633</td>
+      <td>0.7694</td>
     </tr>
     <tr>
       <th>Pleural_Thickening</th>
       <td>0.8062</td>
       <td>0.7860</td>
-      <td>0.7768</td>
+      <td>0.7947</td>
     </tr>
     <tr>
       <th>Pneumonia</th>
       <td>0.7680</td>
       <td>0.7651</td>
-      <td>0.7586</td>
+      <td>0.7693</td>
     </tr>
     <tr>
       <th>Pneumothorax</th>
       <td>0.8887</td>
       <td>0.8739</td>
-      <td>0.8743</td>
+      <td>0.8777</td>
     </tr>
   </tbody>
 </table>
