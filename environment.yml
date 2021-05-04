@@ -2,7 +2,7 @@ name: reproduce-chexnet
 channels:
   - conda-forge
 dependencies:
-  - python = 3.6.5
+  - python = 3.6
   - numpy
   - matplotlib
   - pillow
