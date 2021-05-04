@@ -23,8 +23,8 @@ def make_pred_multilabel(data_transforms, model, PATH_TO_IMAGES):
         auc_df: dataframe containing aggregate AUCs by train/test tuples
     """
 
-    # calc preds in batches of 16, can reduce if your GPU has less RAM
-    BATCH_SIZE = 16
+    # calc preds in batches of 32, can reduce if your GPU has less RAM
+    BATCH_SIZE = 32
 
     # set model to eval mode; required for proper predictions given use of batchnorm
     model.train(False)
