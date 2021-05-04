@@ -1,4 +1,4 @@
-source activate reproduce-chexnet
-conda install pytorch=0.2.0 cuda100=1.0-0 -c soumith
-conda install torchvision=0.1.9 -c soumith
+source activate reproduce-chexnet-covid
+conda install pytorch torchvision torchaudio cudatoolkit=10.2 -c pytorch
+conda install -c pytorch torchvision
 

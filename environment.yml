@@ -1,4 +1,4 @@
-name: reproduce-chexnet
+name: reproduce-chexnet-covid
 channels:
   - conda-forge
 dependencies:
